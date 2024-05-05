@@ -44,7 +44,11 @@ public class ScoreBoard {
 
     public List<String> getSummary() {
         return matches.stream()
-                .sorted(Comparator.comparingLong(Match::getTotalScore).reversed())
+                .sorted(Comparator
+                        .comparingLong(Match::getTotalScore)
+                        .reversed()
+                        .thenComparing(Comparator.comparing(Match::getStartTime).reversed())
+                )
                 .map(Match::toString).toList();
     }
 
